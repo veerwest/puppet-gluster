@@ -82,8 +82,8 @@ define gluster::mount (
   if ! member(['defined', 'present', 'unmounted', 'absent', 'mounted'], $ensure) {
     fail("Unknown option ${ensure} for ensure")
   }
-
-  $mount_options = [ $options, $ll, $lf, $t, $dim, $r, ]
+  
+  $mount_options = delete_undef_values([ $options, $ll, $lf, $t, $dim, $r, ])
   $_options = join(delete($mount_options, ''), ',')
 
   mount { $title:
